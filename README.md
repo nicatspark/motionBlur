@@ -1,4 +1,4 @@
-# Motion Blur function
+# Motion Blur utility
 
 A helper that adds speeeed to your pixels.
 
@@ -33,21 +33,21 @@ async function openDrawer() {
 
 ### microAnimation option arguments object
 
-`element` - element to move.
-`durationMs` - defaults to 1000ms.
-`x` - move relative to current position.
-`y` - move relative to current position.
-`xAbsolute` - optional absolute positioning alternative.
-`yAbsolute` - optional absolute positioning alternative.
-`applyToggle`
-`easing` - many built in easing are available, see https://easings.net/
-`useMotionBlur` - defaults to true.
-`blurMultiplier` - defaults to 1. 1.5 makes the motion bluriness 50% more pronounced.
-`docRoot` - defaults to document.
+- `element` - element to move.
+- `durationMs` - defaults to 1000ms.
+- `x` - move relative to current position.
+- `y` - move relative to current position.
+- `xAbsolute` - optional absolute positioning alternative.
+- `yAbsolute` - optional absolute positioning alternative.
+- `applyToggle`
+- `easing` - many built in easing are available, see <https://easings.net/>
+- `useMotionBlur` - defaults to true.
+- `blurMultiplier` - defaults to 1. 1.5 makes the motion bluriness 50% more pronounced.
+- `docRoot` - defaults to document.
 
 ### Typescript types
 
-This little helper is built in Typescript. `MotionBlurOptions`, `easingFactoryProduct` are exported.
+This little utility is built in Typescript. `MotionBlurOptions`, `easingFactoryProduct` are exported.
 
 ### Mathematical easings algorithm
 
