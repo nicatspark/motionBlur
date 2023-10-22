@@ -13,6 +13,7 @@
  * @param easing - many built in easing are available, see https://easings.net/
  * @param useMotionBlur - default to true.
  * @param blurMultiplier
+ * @param blockMovement - defaults to false. Blurs but doesn't move anything.
  * @param docRoot - defaults to document.
  */
 interface MotionBlurOptions {
@@ -25,6 +26,7 @@ interface MotionBlurOptions {
   easing?: keyof easingFactoryProduct
   useMotionBlur?: boolean
   blurMultiplier?: number
+  blockMovement?: boolean
   docRoot?: Document
 }
 
@@ -108,6 +110,7 @@ async function motionBlur(
     easing = 'easeOutExpo',
     useMotionBlur = true,
     blurMultiplier = 1,
+    blockMovement = false,
     docRoot = document,
   }: MotionBlurOptions = {}
 ) {
@@ -137,8 +140,10 @@ async function motionBlur(
       //
       if (useMotionBlur) applyMotionBlur(easedProgress)
       //
-      element.style.left = originPos.x + easedProgress.x + 'px'
-      element.style.top = originPos.y + easedProgress.y + 'px'
+      if (!blockMovement) {
+        element.style.left = originPos.x + easedProgress.x + 'px'
+        element.style.top = originPos.y + easedProgress.y + 'px'
+      }
 
       if (elapsedMs < durationMs) {
         window.requestAnimationFrame(step) // Keep going.

@@ -1,10 +1,10 @@
 # Motion Blur utility
 
-A helper that adds speeeed to your pixels.
+A helper that adds speeeed to your pixels. It acctuall adds directional blur in the direction your element is moving. And more blur the longer the move.
 
 ## Why
 
-Sure it is cool when things move. But it looks even cooler when things move fast. Problem is that moving things fast in a UI requires no effort. Turns out its when it looks like it moves fast it is cool. Enter Motion Blur. Add it to whatever you need to give the impression of speed and enjoy. Actually, now you can slow down your moves to really enjoy the fresh speedy look.
+Sure it is cool when things moves. But it looks even cooler when things move fast. Problem is that moving things around fast in a UI requires no effort. Turns out its when it looks like it moves fast that it is cool. Enter Motion Blur. Add it to whatever you need to give the impression of speed and enjoy. Actually, now you can slow down your moves to really enjoy the fresh speedy look.
 
 ## Install
 
@@ -43,6 +43,7 @@ async function openDrawer() {
 - `easing` - many built in easing are available, see <https://easings.net/>
 - `useMotionBlur` - defaults to true.
 - `blurMultiplier` - defaults to 1. 1.5 makes the motion bluriness 50% more pronounced.
+- `blockMovement` - defaults to false. Motions blurs but doesn't move.
 - `docRoot` - defaults to document.
 
 ### Typescript types
@@ -51,10 +52,10 @@ This little utility is built in Typescript. `MotionBlurOptions`, `easingFactoryP
 
 ### Mathematical easings algorithm
 
-Should feel adventurous, go take the easings algorithms for a spin. The `easingFactory` factory function is exported as well.
+Should feel adventurous, go take the easings algorithms for a spin. The `easingFactory` factory function is exported as well. Have fun.
 
 ---
 
-Links: [NPM](https://www.npmjs.com/package/@foundit/motionBlur) | [Github Issues](https://github.com/nicatspark/motionBlur/issues) | [Codepen](https://codepen.io/nicolashervy/pen/qBaqgzM?editors=1010)
+Links: [NPM](https://www.npmjs.com/package/@foundit/motion-blur) | [Github Issues](https://github.com/nicatspark/motionBlur/issues) | [Codepen](https://codepen.io/nicolashervy/pen/qBaqgzM?editors=1010)
 
 Author: [nicolas@hervy.se](mailto:nicolas@hervy.se)
