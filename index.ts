@@ -238,6 +238,11 @@ async function motionBlur(
   })
 }
 
+/**
+ * Returns a factory of easing algorithms. See https://easings.net/
+ *
+ * @returns easing algorithms
+ */
 function easingFactory(): easingFactoryProduct {
   // Visualized at https://easings.net/
   const easeInSine = (x: number) => 1 - Math.cos((x * Math.PI) / 2)
