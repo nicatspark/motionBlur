@@ -31,6 +31,10 @@ interface MotionBlurOptions {
 }
 
 interface easingFactoryProduct {
+  linear: (x: number) => number
+  easeIn: (x: number) => number
+  easeOut: (x: number) => number
+  easeInOut: (x: number) => number
   easeInSine: (x: number) => number
   easeOutSine: (x: number) => number
   easeInOutSine: (x: number) => number
@@ -333,8 +337,15 @@ function easingFactory(): easingFactoryProduct {
     x < 0.5
       ? (1 - easeOutBounce(1 - 2 * x)) / 2
       : (1 + easeOutBounce(2 * x - 1)) / 2
-
+  const linear = (x: number) => x
+  const easeIn = easeInQuad
+  const easeOut = easeOutQuad
+  const easeInOut = easeInOutQuad
   return {
+    linear,
+    easeIn,
+    easeOut,
+    easeInOut,
     easeInSine,
     easeOutSine,
     easeInOutSine,
