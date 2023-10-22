@@ -1,10 +1,14 @@
 # Motion Blur utility
 
-A helper that adds speeeed to your pixels. It acctuall adds directional blur in the direction your element is moving. And more blur the longer the move.
+A helper that adds speeeed to your pixels. It actually adds directional blur in the direction your element is moving. And more blur the longer the move.
 
 ## Why
 
 Sure it is cool when things moves. But it looks even cooler when things move fast. Problem is that moving things around fast in a UI requires no effort. Turns out its when it looks like it moves fast that it is cool. Enter Motion Blur. Add it to whatever you need to give the impression of speed and enjoy. Actually, now you can slow down your moves to really enjoy the fresh speedy look.
+
+## How
+
+I uses javascript easing algorithms to animate and continuously calculate the position of the element and at the same time add blur using a filter svg, adapting the amount of, and direction of, the amount of blur.
 
 ## Install
 
@@ -44,7 +48,7 @@ async function openDrawer() {
 - `useMotionBlur` - defaults to true.
 - `blurMultiplier` - defaults to 1. 1.5 makes the motion bluriness 50% more pronounced.
 - `blockMovement` - defaults to false. Motions blurs but doesn't move.
-- `docRoot` - defaults to document.
+- `docRoot` - This is were the SVG will be placed into. Defaults to document.body
 
 ### Typescript types
 
