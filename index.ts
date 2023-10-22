@@ -27,7 +27,7 @@ interface MotionBlurOptions {
   useMotionBlur?: boolean
   blurMultiplier?: number
   blockMovement?: boolean
-  docRoot?: Document
+  docRoot?: Document['body'] | HTMLElement
 }
 
 interface easingFactoryProduct {
@@ -115,7 +115,7 @@ async function motionBlur(
     useMotionBlur = true,
     blurMultiplier = 1,
     blockMovement = false,
-    docRoot = document,
+    docRoot = document.body,
   }: MotionBlurOptions = {}
 ) {
   return new Promise((resolve) => {
@@ -185,7 +185,7 @@ async function motionBlur(
       // check that svg is not already present
       if (!docRoot.querySelector('svg#motion-blur-svg')) {
         const svg = createFilterSVG()
-        docRoot.body.appendChild(svg)
+        docRoot.appendChild(svg)
       }
       element.style.filter = 'url(#svg-motion-blur)'
     }
