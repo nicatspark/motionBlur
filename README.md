@@ -8,7 +8,8 @@ Sure it is cool when things moves. But it looks even cooler when things move fas
 
 ## How
 
-I uses javascript easing algorithms to animate and continuously calculate the position of the element and at the same time add blur using a filter svg, adapting the amount of, and direction of, the amount of blur.
+I uses javascript easing algorithms to animate and continuously calculate the position of the element, (using the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)) and at the same time add blur using a filter svg, adapting the amount of, and direction of, the amount of blur.
+So the movement does not come from CSS transition/animation and it does not use the web animation api as my [microAnimation](https://www.npmjs.com/package/@foundit/micro-animations) package does.
 
 ## Install
 
@@ -46,7 +47,7 @@ async function openDrawer() {
 - `applyToggle`
 - `easing` - many built in easing are available, see <https://easings.net/>
 - `useMotionBlur` - defaults to true.
-- `blurMultiplier` - defaults to 1. 1.5 makes the motion bluriness 50% more pronounced.
+- `blurMultiplier` - defaults to 1. 1.5 makes the motion bluriness 50% more pronounced. A 10 pixel move with multiplier set to 30 will render the same amount of max blur as a 300px move with multiplier set to 1.
 - `blockMovement` - defaults to false. Motions blurs but doesn't move.
 - `docRoot` - This is were the SVG will be placed into. Defaults to document.body
 
