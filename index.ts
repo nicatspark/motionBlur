@@ -121,10 +121,10 @@ async function motionBlur(
   return new Promise((resolve) => {
     let start: number | undefined = undefined
     const easings = easingFactory()
-    const elStartPosition = window.getComputedStyle(element)
+    const elComputedStyles = window.getComputedStyle(element)
     const originPos = {
-      x: parseInt(elStartPosition.left),
-      y: parseInt(elStartPosition.top),
+      x: parseInt(elComputedStyles.left),
+      y: parseInt(elComputedStyles.top),
     }
     // Motion blur specific.
     let previousX: number | undefined, previousY: number | undefined
@@ -141,6 +141,8 @@ async function motionBlur(
         x: easings[easing](linearProgress) * xRelative,
         y: easings[easing](linearProgress) * yRelative,
       }
+      if (elComputedStyles.position === 'static')
+        element.style.position = 'relative'
       //
       if (useMotionBlur) applyMotionBlur(easedProgress)
       //
