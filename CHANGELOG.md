@@ -1,5 +1,13 @@
 # @foundit/motion-blur
 
+## 0.0.4
+
+### Patch Changes
+
+- 51a5601: Make statically positioned element relative.
+- Added some documentation
+- 951c9db: Add linear, easeIn, easeOut, easeInOut to easings
+
 ## 0.0.3
 
 ### Patch Changes
