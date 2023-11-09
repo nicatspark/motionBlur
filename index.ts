@@ -2,20 +2,6 @@
 // INTERFACE
 // =================================================================================================
 
-/**
- * @param element - element to move.
- * @param durationMs - defaults to 1000ms.
- * @param x - move relative to current position.
- * @param y - move relative to current position.
- * @param xAbsolute - optional absolute positioning alternative.
- * @param yAbsolute - optional absolute positioning alternative.
- * @param applyToggle
- * @param easing - many built in easing are available, see https://easings.net/
- * @param useMotionBlur - default to true.
- * @param blurMultiplier
- * @param blockMovement - defaults to false. Blurs but doesn't move anything.
- * @param docRoot - defaults to document.
- */
 interface MotionBlurOptions {
   durationMs?: number
   x?: number
@@ -72,35 +58,20 @@ interface easingFactoryProduct {
 // =================================================================================================
 
 /**
- * Minimum arguments to pass in the argument object is ´element´ and a ´transformEnd´ keyframe object.
- * Transform start is then picked up from the element's computed style.
+ * Moves an element with motion blur.
  *
- * async function close() {
- *   await microAnimation({
- *     element,
- *     duration: 300,
- *     transformEnd: { opacity: 0 },
- *   });
- *   removeElement()
- * }
- *
- * For a multiple keyframe animation, pass an array of transformEnd objects. Again, the first keyframe
- * will be picked up from the element's computed style. The offset property is optional, and is used
- * to split transitions between keyframes, defaults to splitting equally between frames.
- * In the example below, the background color will change to orangered at 70% of the animation.
- *
- * ...
- * await microAnimation({
- *   element,
- *   duration: 300,
- *   transformEnd: [{
- *      backgroundColor: 'orangered',
- *      opacity: 1, offset: 0.7
- *    }, {
- *      transform: "translateX(0)",
- *      backgroundColor: 'blue'
- *    }]
- *  ...
+ * @param element - element to move.
+ * @param durationMs - defaults to 1000ms.
+ * @param x - move relative to current position.
+ * @param y - move relative to current position.
+ * @param xAbsolute - optional absolute positioning alternative.
+ * @param yAbsolute - optional absolute positioning alternative.
+ * @param applyToggle - if true, will toggle between current position and target position.
+ * @param easing - many built in easing are available, see https://easings.net/
+ * @param useMotionBlur - default to true.
+ * @param blurMultiplier - defaults to 1. Higher values increase blur.
+ * @param blockMovement - defaults to false. Blurs but doesn't move anything.
+ * @param docRoot - defaults to document.
  */
 async function motionBlur(
   element: HTMLElement,
@@ -127,7 +98,8 @@ async function motionBlur(
       y: parseInt(elComputedStyles.top),
     }
     // Motion blur specific.
-    let previousX: number | undefined, previousY: number | undefined
+    let previousX: number | undefined
+    let previousY: number | undefined
     if (useMotionBlur) initMotionBlur()
     //
     convertOptionalAbsoluteToRelative()
@@ -219,8 +191,8 @@ async function motionBlur(
     }
 
     function applyMotionBlur(easedProgress: { x: number; y: number }) {
-      previousX || (previousX = easedProgress.x)
-      previousY || (previousY = easedProgress.y)
+      previousX ?? (previousX = easedProgress.x)
+      previousY ?? (previousY = easedProgress.y)
       const diff = [
         Math.abs(Math.round((easedProgress.x - previousX) * blurMultiplier)),
         Math.abs(Math.round((easedProgress.y - previousY) * blurMultiplier)),
@@ -386,7 +358,7 @@ function easingFactory(): easingFactoryProduct {
   }
 }
 
-export { motionBlur, easingFactory }
+export { easingFactory, motionBlur }
 
 export type { MotionBlurOptions, easingFactoryProduct }
 
