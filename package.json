@@ -1,7 +1,7 @@
 {
   "name": "@foundit/motion-blur",
   "version": "0.0.4",
-  "description": "",
+  "description": "Makes your elements move with a motion blur effect. Vroom, vrooom!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
