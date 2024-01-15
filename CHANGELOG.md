@@ -1,5 +1,11 @@
 # @foundit/motion-blur
 
+## 0.0.5
+
+### Patch Changes
+
+- 48076ea: Updates casing of EasingFactoryProduct type, adds a toLinear function that transforms easing functions to support WAAPI.
+
 ## 0.0.4
 
 ### Patch Changes
