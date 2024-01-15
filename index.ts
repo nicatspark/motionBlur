@@ -9,48 +9,50 @@ interface MotionBlurOptions {
   xAbsolute?: number
   yAbsolute?: number
   applyToggle?: boolean
-  easing?: keyof easingFactoryProduct
+  easing?: keyof EasingFactoryProduct
   useMotionBlur?: boolean
   blurMultiplier?: number
   blockMovement?: boolean
   docRoot?: Document['body'] | HTMLElement
 }
 
-interface easingFactoryProduct {
-  linear: (x: number) => number
-  easeIn: (x: number) => number
-  easeOut: (x: number) => number
-  easeInOut: (x: number) => number
-  easeInSine: (x: number) => number
-  easeOutSine: (x: number) => number
-  easeInOutSine: (x: number) => number
-  easeInCubic: (x: number) => number
-  easeOutCubic: (x: number) => number
-  easeInOutCubic: (x: number) => number
-  easeInQuint: (x: number) => number
-  easeOutQuint: (x: number) => number
-  easeInOutQuint: (x: number) => number
-  easeInQuad: (x: number) => number
-  easeOutQuad: (x: number) => number
-  easeInOutQuad: (x: number) => number
-  easeInQuart: (x: number) => number
-  easeOutQuart: (x: number) => number
-  easeInOutQuart: (x: number) => number
-  easeInExpo: (x: number) => number
-  easeOutExpo: (x: number) => number
-  easeInOutExpo: (x: number) => number
-  easeInCirc: (x: number) => number
-  easeOutCirc: (x: number) => number
-  easeInOutCirc: (x: number) => number
-  easeInBack: (x: number) => number
-  easeOutBack: (x: number) => number
-  easeInOutBack: (x: number) => number
-  easeInElastic: (x: number) => number
-  easeOutElastic: (x: number) => number
-  easeInOutElastic: (x: number) => number
-  easeInBounce: (x: number) => number
-  easeOutBounce: (x: number) => number
-  easeInOutBounce: (x: number) => number
+type EasingFunction = (x: number) => number
+
+interface EasingFactoryProduct {
+  linear: EasingFunction
+  easeIn: EasingFunction
+  easeOut: EasingFunction
+  easeInOut: EasingFunction
+  easeInSine: EasingFunction
+  easeOutSine: EasingFunction
+  easeInOutSine: EasingFunction
+  easeInCubic: EasingFunction
+  easeOutCubic: EasingFunction
+  easeInOutCubic: EasingFunction
+  easeInQuint: EasingFunction
+  easeOutQuint: EasingFunction
+  easeInOutQuint: EasingFunction
+  easeInQuad: EasingFunction
+  easeOutQuad: EasingFunction
+  easeInOutQuad: EasingFunction
+  easeInQuart: EasingFunction
+  easeOutQuart: EasingFunction
+  easeInOutQuart: EasingFunction
+  easeInExpo: EasingFunction
+  easeOutExpo: EasingFunction
+  easeInOutExpo: EasingFunction
+  easeInCirc: EasingFunction
+  easeOutCirc: EasingFunction
+  easeInOutCirc: EasingFunction
+  easeInBack: EasingFunction
+  easeOutBack: EasingFunction
+  easeInOutBack: EasingFunction
+  easeInElastic: EasingFunction
+  easeOutElastic: EasingFunction
+  easeInOutElastic: EasingFunction
+  easeInBounce: EasingFunction
+  easeOutBounce: EasingFunction
+  easeInOutBounce: EasingFunction
 }
 
 // =================================================================================================
@@ -213,11 +215,43 @@ async function motionBlur(
 }
 
 /**
+ * Convert a custom easing to linear() that can be used with Web Animation API.
+ * Source: https://developer.mozilla.org/en-US/blog/custom-easing-in-css-with-linear/#recreating_popular_eases_with_javascript
+ *
+ * Example usage:
+ * const anim_linear = document
+ *  .querySelector('.bounce[data-method="linear"]')
+ * 	.animate([
+ *  	{ translate: '0% 0%' },
+ *  	{ translate: '0% 200%' },
+ *  ], {
+ *	duration: 2000,
+ *		easing: toLinear(bounce, 100), // 👈 Create a `linear(…)` variant of bounce with 100 points.
+ *		fill: "both",
+ *		iterations: Infinity
+ *	});
+ *
+ * @param easing - easing function such as those from https://easings.net/ or more convenient easingFactory()
+ * @param points - number - The number of points to use for the linear() function. Defaults to 50.
+ * @returns string
+ */
+const toLinear = (
+  easing: EasingFactoryProduct[keyof EasingFactoryProduct] | EasingFunction,
+  points = 50
+) => {
+  const result = [...new Array(points + 1)].map((d, i) =>
+    easing(i * (1 / points))
+  )
+  return `linear(${result.join(',')})`
+}
+
+/**
  * Returns a factory of easing algorithms. See https://easings.net/
+ * Look out for this js proposal https://www.bram.us/2024/01/12/waapi-custom-easing-function/
  *
  * @returns easing algorithms
  */
-function easingFactory(): easingFactoryProduct {
+function easingFactory(): EasingFactoryProduct {
   // Visualized at https://easings.net/
   const easeInSine = (x: number) => 1 - Math.cos((x * Math.PI) / 2)
   const easeOutSine = (x: number) => Math.sin((x * Math.PI) / 2)
@@ -358,9 +392,9 @@ function easingFactory(): easingFactoryProduct {
   }
 }
 
-export { easingFactory, motionBlur }
+export { easingFactory, motionBlur, toLinear }
 
-export type { MotionBlurOptions, easingFactoryProduct }
+export type { MotionBlurOptions, EasingFactoryProduct }
 
 /*
  * Workflow:
