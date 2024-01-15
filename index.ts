@@ -405,4 +405,6 @@ export type { MotionBlurOptions, EasingFactoryProduct }
  * pnpm changeset version - bumps the version in the changeset/package json
  * pnpm changeset publish - publishes the package to npm
  * git push --follow-tags origin main
+ *
+ * `ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
  */
