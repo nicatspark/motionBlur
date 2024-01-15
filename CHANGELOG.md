@@ -4,7 +4,8 @@
 
 ### Patch Changes
 
-- 48076ea: Updates casing of EasingFactoryProduct type, adds a toLinear function that transforms easing functions to support WAAPI.
+- 48076ea: Updates casing of EasingFactoryProduct type.
+- adds a toLinear function that transforms easing functions to support WAAPI.
 
 ## 0.0.4
 
